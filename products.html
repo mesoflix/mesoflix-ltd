@@ -359,33 +359,6 @@
   <footer>
     <span>&copy; 2025 Mesoflix Ltd. All rights reserved. | Private Company</span>
   </footer>
-  <script>
-    function setupDropdowns(root) {
-      const dropdowns = root.querySelectorAll('.dropdown');
-      dropdowns.forEach(drop => {
-        drop.querySelector('.dropdown-toggle')?.addEventListener('click', function(e) {
-          e.preventDefault();
-          e.stopPropagation();
-          dropdowns.forEach(d => { if (d !== drop) d.classList.remove('open'); });
-          drop.classList.toggle('open');
-        });
-      });
-      document.addEventListener('click', () => {
-        dropdowns.forEach(d => d.classList.remove('open'));
-      });
-    }
-    setupDropdowns(document);
-    const menuBtn = document.getElementById('menu-btn');
-    const sidebar = document.getElementById('sidebar');
-    const closeBtn = document.getElementById('close-btn');
-    menuBtn?.addEventListener('click', () => {
-      sidebar.classList.add('active');
-      document.body.style.overflow = 'hidden';
-    });
-    closeBtn?.addEventListener('click', () => {
-      sidebar.classList.remove('active');
-      document.body.style.overflow = '';
-    });
-  </script>
+<script src="main.js"></script>
 </body>
 </html>
