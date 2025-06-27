@@ -1,3 +1,4 @@
+/* Same as before for global layout, with added Team section styling and improved dropdown/side menu for all pages */
 :root {
   --primary: #2d3e50;
   --accent: #21c98b;
@@ -31,14 +32,7 @@ header {
   font-size: 1.5rem;
   font-weight: bold;
 }
-.logo img {
-  border-radius: 50%;
-  margin-right: .5rem;
-  width: 48px;
-  height: 48px;
-  object-fit: cover;
-  border: 2px solid var(--accent);
-}
+.logo svg { display: inline-block; }
 .navbar ul {
   list-style: none;
   display: flex;
@@ -54,8 +48,10 @@ header {
   padding: 0.4rem 0.8rem;
   border-radius: 0.3rem;
   transition: background 0.2s;
+  cursor: pointer;
 }
-.navbar a:hover, .navbar .dropdown:hover > a {
+.navbar a:hover, .navbar .dropdown:hover > a,
+.navbar .dropdown:focus-within > a {
   background: var(--accent);
   color: var(--light);
 }
@@ -68,10 +64,12 @@ header {
   left: 0;
   border-radius: 0.4rem;
   overflow: hidden;
-  min-width: 170px;
+  min-width: 190px;
   z-index: 1;
 }
-.dropdown:hover .dropdown-menu {
+.dropdown:hover > .dropdown-menu,
+.dropdown:focus-within > .dropdown-menu,
+.dropdown.open > .dropdown-menu {
   display: block;
   animation: fadeInUp 0.3s;
 }
@@ -81,6 +79,7 @@ header {
   display: flex;
   align-items: center;
   gap: .6em;
+  padding: 0.55em 1.2em;
 }
 .menu-btn {
   display: none;
@@ -112,6 +111,7 @@ header {
   gap: 1.5em;
   padding: 0 1.5em;
 }
+.sidebar li { position: relative; }
 .sidebar a {
   font-size: 1.3em;
   color: var(--primary);
@@ -121,6 +121,15 @@ header {
   display: block;
   border-bottom: 1px solid #eee;
 }
+.sidebar .dropdown-menu {
+  position: static;
+  background: #f9f9f9;
+  box-shadow: none;
+  display: none;
+  border-radius: 0 0 0.5em 0.5em;
+  margin-bottom: 0.3em;
+}
+.sidebar .dropdown.open > .dropdown-menu { display: block; }
 .close-btn {
   position: absolute;
   top: 1em; right: 1em;
@@ -257,6 +266,44 @@ main {
   text-align: center;
   font-size: 1.1rem;
 }
+.team {
+  margin: 2.5rem 2rem;
+  text-align: center;
+}
+.team-list {
+  display: flex;
+  gap: 2rem;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-top: 2rem;
+}
+.team-member {
+  background: var(--light);
+  border-radius: 1.1rem;
+  box-shadow: var(--shadow);
+  padding: 1.6rem 1rem;
+  min-width: 160px;
+  max-width: 210px;
+  flex: 1 1 160px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  transition: box-shadow 0.2s, transform 0.2s;
+}
+.team-member:hover {
+  transform: translateY(-6px) scale(1.035);
+  box-shadow: 0 12px 30px 0 #21c98b22;
+}
+.team-member img {
+  width: 78px;
+  height: 78px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-bottom: 1rem;
+  border: 3px solid var(--accent);
+}
+.team-member h3 { font-size: 1.2rem; margin-bottom: .3rem;}
+.team-member p { font-size: 1rem; color: #444;}
 .contact {
   text-align: center;
   margin: 2.5rem 0 2rem 0;
@@ -286,17 +333,6 @@ main {
   background: var(--accent);
   color: var(--light);
 }
-.icon {
-  width: 1.5em;
-  height: 1.5em;
-  stroke: var(--accent);
-  fill: none;
-  stroke-width: 2;
-}
-.icon.email { stroke: #21c98b; }
-.icon.whatsapp { stroke: #43d854; }
-.icon.phone { stroke: #3182ce; }
-.icon.insta { stroke: #e1306c; }
 footer {
   background: var(--primary);
   color: var(--light);
@@ -310,6 +346,7 @@ footer {
 @media (max-width: 900px) {
   .feature-list { flex-direction: column; gap: 1.2rem; }
   .hero { flex-direction: column-reverse; padding: 2rem 1rem 1.5rem 1rem; }
+  .team-list { flex-direction: column; gap: 1.2rem;}
 }
 @media (max-width: 700px) {
   .navbar ul { display: none; }
@@ -321,7 +358,7 @@ footer {
 }
 @media (max-width: 500px) {
   .sidebar { width: 90%; }
-  .logo img { width: 36px; height: 36px; }
+  .logo svg { width: 28px; height: 28px;}
   .hero-text h1 { font-size: 1.7rem; }
   .contact-options { flex-direction: column; gap: 1em; }
 }
